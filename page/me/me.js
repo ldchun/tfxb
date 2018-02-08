@@ -16,10 +16,7 @@ function getInData() {
 }
 // 设置信息
 function setUserInfo(self, jsonData) {
-    var level = parseInt(jsonData["level"]);
-    var star = parseInt(jsonData["star"]);
-    var allstar = (level - 1) * 3 + star;
-    var barWidthPer = allstar * 100 / 36 + "%";
+    var barWidthPer = common.totalLevelPer(jsonData["level"], jsonData["star"]);
     self.setData({
         loadclass: "",
         levelBarWidth: barWidthPer,

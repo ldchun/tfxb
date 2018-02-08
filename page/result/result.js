@@ -23,18 +23,23 @@ function getInData() {
 function setUserInfo(self, jsonData) {
     var level = parseInt(jsonData["level"]);
     var star = parseInt(jsonData["star"]);
+    var levelNow = level;
+    var levelNext = level + 1;
     var barWidthPer = star * 100 / 3 + "%";
+    if(level >= 13){
+        levelNow = 12;
+        levelNext = 13;
+        barWidthPer = '100%';
+    }
     var haschoice = (parseInt(jsonData["chance"]) > 0) ? true : false;
     var choiceImgKey = haschoice ? "choicejixu" : "choiceover";
     var choiceClass = haschoice ? "" : "invalid";
     var shareImgKey = (parseInt(gradeTheScore) >= ScoreSuccessVal) ? "scorexuanyao" : "scoreshare";
-    
-    level = (level >= 13) ? (level - 1) : level ;
     self.setData({
         loadclass: "",
         levelBarWidth: barWidthPer,
-        levelNowVal: "Lv" + level,
-        levelNextVal: "Lv" + (level + 1),
+        levelNowVal: "Lv" + levelNow,
+        levelNextVal: "Lv" + levelNext,
         theScore: gradeTheScore,
         userScore: jsonData["score"],
         friendRank: jsonData["friendRank"],

@@ -226,6 +226,14 @@ var FormIdFun = {
         }while(0);
     }
 };
+// 升级进度百分比
+function totalLevelPer(level, star) {
+    var totalStar = (13 - 1) * 3;
+    var allstar = (parseInt(level) - 1) * 3 + parseInt(star);
+    allstar = (allstar <= totalStar) ? allstar : totalStar;
+    var levelPer = allstar * 100 / totalStar + "%";
+    return levelPer;
+}
 /* 公共API接口定义 */
 module.exports = {
     wxShowToast: wxShowToast,
@@ -236,5 +244,6 @@ module.exports = {
     Session: Session,
     AppPages: AppPages,
     UserIdFun: UserIdFun,
-    FormIdFun: FormIdFun
+    FormIdFun: FormIdFun,
+    totalLevelPer: totalLevelPer
 }

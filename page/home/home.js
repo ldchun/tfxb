@@ -35,10 +35,11 @@ function getInData() {
 // 设置信息
 function setUserInfo(self, jsonData) {
     var mapLevel = "lv" + jsonData["level"];
-    var allstar = (parseInt(jsonData["level"]) - 1) * 3 + parseInt(jsonData["star"]);
-    var barWidthPer = allstar * 100 / 36 + "%";
+    var barWidthPer = common.totalLevelPer(jsonData["level"], jsonData["star"]);
+    var starBgHideClass = (parseInt(jsonData["level"]) >= 13) ? "starhide" : "";
     self.setData({
         loadclass: "",
+        starBgHide: starBgHideClass,
         userLevel: jsonData["level"],
         userStar: jsonData["star"],
         userScore: jsonData["score"],
@@ -107,6 +108,7 @@ Page({
         userface: "",
         usernick: "",
         levelBarWidth: "0%",
+        starBgHide: "",
         userLevel: "",
         userStar: "",
         userScore: "",
@@ -115,7 +117,7 @@ Page({
     },
     onLoad: function (options) {
         var self = this;
-        //回复页面
+        //恢复页面
         RecoverHome(self);
         // 设置用户头像
         setUserBoxInfo(self);

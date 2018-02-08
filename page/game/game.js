@@ -114,15 +114,12 @@ function setGradeResInfo(self, jsonData) {
     if (theScore >= ScoreSuccessVal) {
         gradeBgSrc = gradeBgSrcObj["success"];
     }
-    var level = parseInt(jsonData["level"]);
-    var star = parseInt(jsonData["star"]);
-    if ((level > 1) && (level < 13)){
-        star = (star <= 0) ? 3 : star;
-    }
+    var starBgHideClass = (parseInt(jsonData["level"]) >= 13) ? "starhide" : "";
     self.setData({
         gradeLoad: "",
         gradeBgImgSrc: gradeBgSrc,
-        userStar: star,
+        userStar: jsonData["star"],
+        starBgHide: starBgHideClass,
         gradeScoreTotal: theScore
     });
 }
@@ -190,10 +187,10 @@ function questionInit(self, data){
 }
 // 计算总得分
 function calScoreTotal(self, time, isanswer){
-    var curScore = time * 100 / countTimeMaxS;
-    var scoreTotal = self.data.scoreTotalVal + curScore
-    if (scoreTotal > scoreTotalMax){ return ; }
     if (isanswer){
+        var curScore = time * 100 / countTimeMaxS;
+        var scoreTotal = self.data.scoreTotalVal + curScore
+        scoreTotal = (scoreTotal <= scoreTotalMax) ? scoreTotal : scoreTotalMax;
         var scoreH = scoreTotal * 100 / scoreTotalMax + "%";
         self.setData({
             scoreTotalVal: scoreTotal,
@@ -279,7 +276,7 @@ function saveQuestionScore(self){
             wx.hideLoading();
             console.log(err);
             // 失败跳转到首页
-            handleFailToHome("请求错误");
+            handleFailToHome("得分保存失败");
         }
     })
 }
@@ -447,7 +444,8 @@ Page({
         scoreTotalVal: 0,
         scoreTotalH: "0%",
         choiceResClass: "",
-        userStar: "0"
+        userStar: "0",
+        starBgHide: ""
     },
     onLoad: function (options) {
         var self = this;

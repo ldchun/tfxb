@@ -8,7 +8,7 @@
     <view class='home-info'>
         <view class='info-item clearfix info-star'>
             <view class='info-title'>Lv {{userLevel}}</view>
-            <view class="info-con iconstar-bg"><text class="iconstar {{'star'+userStar}}"></text></view>
+            <view class="info-con iconstar-bg {{starBgHide}}"><text class="iconstar {{'star'+userStar}}"></text></view>
         </view>
         <view class='info-item clearfix info-gold'>
             <view class='info-title'>
@@ -27,7 +27,7 @@
                 <view class='level-max'>Lv13</view>
             </view>
             <view class='level-tip'>
-                <view class='tip-val' style='left:{{levelBarWidth}}'>Lv {{userLevel}}</view>
+                <view class='tip-val' style='left:{{levelBarWidth}}'>Lv{{userLevel}}</view>
             </view>
         </view>
     </view>

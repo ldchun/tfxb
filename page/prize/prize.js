@@ -348,6 +348,8 @@ function submitTheGiftInfo(self, name, phone) {
                     flag: "success"
                 });
                 popFormShow(self, false);
+                // 刷新奖励列表
+                getMyGiftList(self);
             }
             else{
                 wxShowToast({

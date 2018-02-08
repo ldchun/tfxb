@@ -48,6 +48,7 @@
 .grade-main{position:relative;padding:0 5%;}
 .grade-main image.grade-bg{width:100%;}
 .grade-main .grade-info{position:absolute;z-index:10;left:50%;top:50%;width:36%;height:40%;margin-left:-18%;margin-top:-18%;text-align:center;}
+.grade-star .starhide{display:none;}
 .grade-info .grade-score{font-size:28px;font-weight:bold;line-height:1;letter-spacing:2px;}
 .grade-bag{width:70%;margin:8% auto 0 auto;text-align:center;}
 .grade-bag .img-bag{width:100%;}
