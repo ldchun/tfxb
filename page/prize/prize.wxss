@@ -22,7 +22,7 @@
 .count-bd{position:absolute;z-index:10;top:0;left:0;width:100%;height:100%;}
 .count-con{display:inline-block;width:69%;margin-left:6px;}
 .count-con .time-cell{float:left;width:25%;padding:0 6px;font-size:26px;letter-spacing:8px;border:1px solid transparent;}
-.mygift-content{width:86%;min-height:200px;margin:0 auto;padding:5px;background:rgba(233,233,233,0.3);}
+.mygift-content{width:86%;margin:0 auto;padding:20px 5px;background:rgba(233,233,233,0.3);}
 .mygift-li{margin:20px 0;color:#333;background:#FFF;}
 .mygift-raw .gift-hd{min-width:70px;height:100%;padding:5px;font-size:17px;
 color:#fb7b0e;text-align:center;border-right:1px solid #333;}

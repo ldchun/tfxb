@@ -277,7 +277,7 @@ function getMyGiftList(self){
         success: function (res) {
             wx.hideLoading();
             var jsonData = res.data['data'];
-            if (isArray(jsonData)){
+            if ((isArray(jsonData) && jsonData.length > 0)){
                 // 加载列表
                 loadMyGiftList(self, jsonData);
             }
