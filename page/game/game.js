@@ -214,7 +214,7 @@ function answerQuestion(self, data, index){
     clearTimeout(countDownStartTimer);
     countDownStartTimer = setTimeout(function(){
         countDownStart(self, countTimeMaxS);
-    }, 2000);
+    }, 1500);
 }
 // 生成随机题目以及随机选项
 function getRandomQuestion(dataArr){
