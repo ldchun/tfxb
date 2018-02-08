@@ -68,24 +68,25 @@ function answerVoiceFun(flag, handle){
             innerAudioContext.seek(0);
     }
 }
-
-// 生成随机数
-function GetRandomNum(m, n) {
-    return Math.floor(Math.random() * Math.abs(n - m) + m);
-}
 // 倒计时运行控制
 var isCountDownRun = false;
 var countDownTimer; // 倒计时计时器 1s循环
 var goNextQuestionTimer; // 进入下一题答题计时器
 var RecoverCountDownTimer; // 恢复计时器为10s
 var countDownStartTimer;
+var pageToResultTimer;
 
 var hasAnswerQuestion = false;   //是否已经答题
+var QuestionRunning = false;    // 是否进入答题
 // 得分结果背景
 var gradeBgSrcObj = {
     "fail": "../../asset/image/grade-fail.png",
     "success": "../../asset/image/grade-success.png"
 };
+// 生成随机数
+function GetRandomNum(m, n) {
+    return Math.floor(Math.random() * Math.abs(n - m) + m);
+}
 // 题目列表相关设置
 var QuestionToken = "";
 var QuestionsArr = [];
@@ -239,7 +240,8 @@ function goGradeRes(self, jsonData){
     // 设置结果信息
     setGradeResInfo(self, jsonData);
     // 跳转到成绩页面
-    setTimeout(function () {
+    clearTimeout(pageToResultTimer);
+    pageToResultTimer = setTimeout(function () {
         var score = parseInt(self.data.scoreTotalVal);
         wx.redirectTo({
             url: AppPages.pageResult + "?score=" + score
@@ -282,6 +284,8 @@ function saveQuestionScore(self){
 }
 // 答题结束
 function questionEnd(self){
+    if (!QuestionRunning){return ;}
+    QuestionRunning = false;
     // 保存得分
     saveQuestionScore(self);
 }
@@ -387,6 +391,7 @@ function getAllQuestions(self) {
                             // 显示内容
                             contentShow(self, true);
                             // 开始答题
+                            QuestionRunning = true; 
                             startQuestion(self);
                         } else {
                             atOnceLinkToHome();
@@ -461,9 +466,11 @@ Page({
     onUnload: function (e) {
         var self = this;
         console.log("game onUnload");
+        QuestionRunning = false;
         clearTimeout(countDownTimer);
         clearTimeout(goNextQuestionTimer);
         clearTimeout(RecoverCountDownTimer);
+        clearTimeout(pageToResultTimer);
         isCountDownRun = false;
         QuestionsArr = [];
         QuestionTotal = 0;
