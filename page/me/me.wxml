@@ -54,5 +54,5 @@
     </view>
 </view>
 <view class='share'>
-    <canvas class='sharecanvas' canvas-id="myCanvas" style="width:420px;height:630px;"/>
+    <canvas class='sharecanvas' canvas-id="myCanvas" style="width:420px;height:630px;"></canvas>
 </view>
