@@ -252,7 +252,7 @@ function goGradeRes(self, jsonData){
         wx.redirectTo({
             url: AppPages.pageResult + "?score=" + score
         })
-    }, 2000);
+    }, 2500);
 }
 // 保存本轮比赛得分
 function saveQuestionScore(self){
