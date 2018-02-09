@@ -77,7 +77,7 @@ function getRankListData(self, inData, flag){
             if (isAll){
                 rankList = jsonData["top10"];
                 rankMe = jsonData["myRank"];
-                if (!rankMe["inTop10"]){
+                if (rankMe["inTop10"]){
                     rankMeShow = "slhide";
                 }else{
                     rankMeShow = "";
