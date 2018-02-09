@@ -14,30 +14,14 @@
         <view class='page-plate plate-left'>
             <view class='pack-body'>
                 <view class='pack-con'>
-                    <view class='pack-first'>
-                        <image src="../../asset/image/prize-first.png" mode="widthFix"></image>
-                    </view>
-                    <view class='pack-other'>
-                        <image src="../../asset/image/prize-other1.png" mode="widthFix"></image>
-                        <image src="../../asset/image/prize-other2.png" mode="widthFix"></image>
-                        <image src="../../asset/image/prize-other3.png" mode="widthFix"></image>
+                    <view class='pack-row' wx:for="{{packListArr}}" wx:key="{{index}}">
+                        <image class='img-pack' src="{{item}}" mode="widthFix"></image>
                     </view>
                 </view>
                 <view class='pack-rule'>
                     <view class='rule-title'>游戏规则</view>
                     <view class='rule-con'>
-                        <view class='rule-row'>
-                            1. 本赛季于2018年2月22日（农历正月初七）晚24点结束，届时，总排名前10名的玩家将分别获得上述奖品；所有通关用户将共同瓜分1万元现金红包；
-                        </view>
-                        <view class='rule-row'>
-                            2. 游戏共设13个等级，每个等级分3轮闯关，每轮10道题目，每题满分100分；
-                        </view>
-                        <view class='rule-row'>
-                            3. 每题须在10秒内作答，成绩随时间递减，每轮总分≥600分视为闯关成功。
-                        </view>
-                         <view class='rule-row'>
-                            注：若利用系统漏洞或不正当途径参加游戏，将取消其获奖资格。
-                        </view>
+                        <view class='rule-row' wx:for="{{ruleListArr}}" wx:key="{{index}}">{{item}}</view>
                     </view>
                 </view>
             </view>

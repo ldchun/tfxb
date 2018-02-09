@@ -63,6 +63,8 @@ Page({
         popGiftTitle: "",
         mygiftRedPackList: [],
         mygiftBagList: [],
+        packListArr: [],
+        ruleListArr: []
     },
     onLoad: function (options) {
         var self = this;
@@ -156,9 +158,35 @@ function pageBodySwicth(self, menu) {
             break;
     }
 }
+// 加载礼包 和 规则信息
+function loadGiftRuleInfo(self){
+    wx.showLoading({
+        title: '加载中...',
+    })
+    wx.request({
+        url: Server.giftInfoUrl,
+        data: "",
+        success: function (res) {
+            wx.hideLoading();
+            var jsonData = res.data['data'];
+            var code = res.data['code'];
+            if (parseInt(code) == 200){
+                self.setData({
+                    packListArr: jsonData["giftImgPaths"],
+                    ruleListArr: jsonData["gameRules"]
+                });
+            }
+        },
+        fail: function (err) {
+            wx.hideLoading();
+            console.log(err);
+        }
+    })
+}
 // 左边内容
 function pageBodyLeftInit(self){
-    
+    // 加载礼包信息、规则信息
+    loadGiftRuleInfo(self);
 }
 // 右边内容
 function pageBodyRightInit(self) {

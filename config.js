@@ -43,7 +43,9 @@ var config = {
         // 获取个人获得的礼包
         myGiftUrl: `${host}/gift/myGift`,
         // 领取个人礼包
-        getMyGiftUrl: `${host}/gift/getGift`
+        getMyGiftUrl: `${host}/gift/getGift`,
+        // 终极大礼信息
+        giftInfoUrl: `${host}/gift/giftInfo`,
     }
 };
 module.exports = config;

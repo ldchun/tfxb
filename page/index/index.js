@@ -242,9 +242,10 @@ function AppLogin(self, callback, addfriend) {
 }
 // 跳转首页
 function linkPageHome(ms) {
-    var delay = (typeof (ms) != "undefined") ? ms : 500;
+    var delay = (typeof (ms) != "undefined") ? ms : 1000;
     clearTimeout(linkPageTimer);
     linkPageTimer = setTimeout(function () {
+        wx.hideToast();
         wx.redirectTo({
             url: AppPages.pageHome
         });
@@ -295,9 +296,15 @@ function actionSignInfo(self) {
             var jsonData = res.data['data'];
             var code = res.data['code'];
             if (parseInt(code) == 200){
-                wx.showLoading({
-                    title: '签到成功',
-                })
+                var tipText = "签到成功";
+                if ((typeof (jsonData["signScore"]) != "undefined") && (jsonData["signScore"] > 0)){
+                    tipText = "签到成功，获得" + jsonData["signScore"] + "积分";
+                }
+                wx.showToast({
+                    title: tipText,
+                    icon: 'none',
+                    duration: 1500
+                });
             }
             // 跳转首页
             linkPageHome();
