@@ -58,9 +58,9 @@ function reqUserInfoData(self, inData){
         clientData.allStar = jsonData["allStar"];
         return clientData;
     }
-    wx.showLoading({
-        title: '加载中...',
-    })
+    // wx.showLoading({
+    //     title: '加载中...',
+    // })
     wx.request({
         url: Server.getUserInfoUrl,
         data: inData,
@@ -127,6 +127,12 @@ Page({
     onShow: function (e) {
         var self = this;
         RecoverHome(self);
+    },
+    onPullDownRefresh: function () {
+        var self = this;
+        // 从服务器获取信息
+        getUserInfo(self);
+        wx.stopPullDownRefresh();
     },
     onShareAppMessage: common.ShareApp,
     linkPageMe: function (e) {

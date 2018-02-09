@@ -5,8 +5,8 @@
         "page/game/game",
         "page/result/result",
         "page/me/me",
-        "page/prize/prize",
-        "page/rank/rank"
+        "page/rank/rank",
+        "page/prize/prize"
     ],
     "window": {
         "navigationBarTextStyle": "white",

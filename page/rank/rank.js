@@ -71,7 +71,20 @@ function getRankListData(self, inData, flag){
         success: function (res) {
             wx.hideLoading();
             var jsonData = res.data['data'];
-            var listArr = handleListData(jsonData);
+            var rankList = jsonData;
+            var rankMe = "";
+            var rankMeShow = "slhide";
+            if (isAll){
+                rankList = jsonData["top10"];
+                rankMe = jsonData["myRank"];
+                if (!rankMe["inTop10"]){
+                    rankMeShow = "slhide";
+                }else{
+                    rankMeShow = "";
+                }
+            }
+            //排名列表
+            var listArr = handleListData(rankList);
             if (listArr.length <= 0) {
                 common.wxShowToast({
                     title: '暂无更多排名',
@@ -87,7 +100,9 @@ function getRankListData(self, inData, flag){
                 }
             }
             self.setData({
-                rankListArr: listArr
+                rankListArr: listArr,
+                myRank: rankMe,
+                myRankShow: rankMeShow,
             });
         },
         fail: function (err) {
@@ -136,6 +151,8 @@ Page({
         loadok: 'slhide',
         rankPage: "",
         rankListArr: [],
+        myRank: "",
+        myRankShow: "slhide",
         friendRankMenuImg: friendRankMenuImgSrc["on"],
         allRankMenuImg: allRankMenuImgSrc["off"]
     },

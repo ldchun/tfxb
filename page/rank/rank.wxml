@@ -27,6 +27,24 @@
                 </view>
                 <view class='li-cell li-score'>{{item.score}}</view>
             </view>
+            <view class='rank-me {{myRankShow}}'>
+                <view class='rankme-line'>... ...</view>
+                <view class='rank-li clearfix'>
+                    <view class='li-cell li-sort'>
+                        <view class='sort-box'>{{myRank.sort}}</view>
+                    </view>
+                    <view class='li-cell li-face'>
+                        <image class="img-face" src="{{myRank.userface}}" mode="widthFix"></image>
+                    </view>
+                    <view class='li-cell li-nick'>
+                        <text class='nick-text'>{{myRank.usernick}}</text>
+                    </view>
+                    <view class='li-cell li-level'>
+                        {{'Lv'+myRank.level}}<text class="iconstar {{'star'+myRank.star}}"></text>
+                    </view>
+                    <view class='li-cell li-score'>{{myRank.score}}</view>
+                </view>
+            </view>
         </view>
         </scroll-view>
     </view>
