@@ -112,14 +112,20 @@ function pageContentSwitch(self, flag){
 function setGradeResInfo(self, jsonData) {
     var theScore = parseInt(jsonData["theScore"]);
     var gradeBgSrc = gradeBgSrcObj["fail"];
-    if (theScore >= ScoreSuccessVal) {
+    var star = parseInt(jsonData["star"]);
+    var isSuccess = (theScore >= ScoreSuccessVal) ? true : false;
+    if (isSuccess){
         gradeBgSrc = gradeBgSrcObj["success"];
+        var oldStar = self.data.userStar;
+        if ((oldStar == 2) && (star == 0)){
+            star = 3;
+        }
     }
     var starBgHideClass = (parseInt(jsonData["level"]) >= 13) ? "starhide" : "";
     self.setData({
         gradeLoad: "",
         gradeBgImgSrc: gradeBgSrc,
-        userStar: jsonData["star"],
+        userStar: star,
         starBgHide: starBgHideClass,
         gradeScoreTotal: theScore
     });
@@ -433,6 +439,27 @@ function handleFailToHome(msg) {
         })
     }, 1000);
 }
+// 加载得分弹窗信息
+function loadGradeResInfo(self){
+    var inData = {};
+    inData.userId = UserIdFun.get();
+    wx.request({
+        url: Server.getUserInfoUrl,
+        data: inData,
+        success: function (res) {
+            wx.hideLoading();
+            var jsonData = res.data['data'];
+            // 设置用户数据
+            self.setData({
+                userStar: jsonData["star"],
+            });
+        },
+        fail: function (err) {
+            wx.hideLoading();
+            console.log(err);
+        }
+    })
+}
 
 Page({
     data:{
@@ -462,6 +489,8 @@ Page({
         pageContentSwitch(self, "question");
         // 加载题目
         getAllQuestions(self);
+        // 加载结果弹窗的信息（星星）
+        loadGradeResInfo(self);
     },
     onUnload: function (e) {
         var self = this;

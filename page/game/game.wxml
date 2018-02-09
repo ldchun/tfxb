@@ -73,7 +73,7 @@
         <view class='grade-info flex-box'>
             <view class='flex-item'>
                 <view class="grade-star">
-                    <text class='iconstar-bg {{starBgHide}}'><text class="anim-star iconstar {{'star'+userStar}}"></text></text>
+                    <text class='iconstar-bg {{starBgHide}}'><text class="anim-resstar iconstar {{'star'+userStar}}"></text></text>
                 </view>
                 <view class="grade-score">
                     <text class="grade-val">{{gradeScoreTotal}}分</text>
